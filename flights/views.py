@@ -1,54 +1,43 @@
 from datetime import datetime
 
-from rest_framework.generics import (
-    CreateAPIView,
-    DestroyAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-    RetrieveUpdateAPIView,
-)
+from rest_framework import generics
 
-from .models import Booking, Flight
-from .serializers import (
-    BookingDetailsSerializer,
-    BookingSerializer,
-    FlightSerializer,
-    UpdateBookingSerializer,
-)
+from flights import serializers
+from flights.models import Booking, Flight
 
 
-class FlightsList(ListAPIView):
+class FlightsList(generics.ListAPIView):
     queryset = Flight.objects.all()
-    serializer_class = FlightSerializer
+    serializer_class = serializers.FlightSerializer
 
 
-class BookingsList(ListAPIView):
+class BookingsList(generics.ListAPIView):
     queryset = Booking.objects.filter(date__gte=datetime.today())
-    serializer_class = BookingSerializer
+    serializer_class = serializers.BookingSerializer
 
 
-class BookingDetails(RetrieveAPIView):
+class BookingDetails(generics.RetrieveAPIView):
     queryset = Booking.objects.all()
-    serializer_class = BookingDetailsSerializer
+    serializer_class = serializers.BookingDetailsSerializer
     lookup_field = "id"
     lookup_url_kwarg = "booking_id"
 
 
-class UpdateBooking(RetrieveUpdateAPIView):
+class UpdateBooking(generics.RetrieveUpdateAPIView):
     queryset = Booking.objects.all()
-    serializer_class = UpdateBookingSerializer
+    serializer_class = serializers.UpdateBookingSerializer
     lookup_field = "id"
     lookup_url_kwarg = "booking_id"
 
 
-class CancelBooking(DestroyAPIView):
+class CancelBooking(generics.DestroyAPIView):
     queryset = Booking.objects.all()
     lookup_field = "id"
     lookup_url_kwarg = "booking_id"
 
 
-class BookFlight(CreateAPIView):
-    serializer_class = UpdateBookingSerializer
+class BookFlight(generics.CreateAPIView):
+    serializer_class = serializers.UpdateBookingSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, flight_id=self.kwargs["flight_id"])
