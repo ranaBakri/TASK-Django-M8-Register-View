@@ -2,7 +2,7 @@ Where do I sign up?
 
 ## Steps
 
-1. Fork and clone [this repository](https://github.com/JoinCODED/REST_task_04/).
+1. Fork and clone [this repository](https://github.com/JoinCODED/TASK-Django-M8-Register-View).
 2. Create a `virtual environment`.
 3. Install the packages using `pip install -r requirements/dev.lock`.
 4. Create a view for registering users:
