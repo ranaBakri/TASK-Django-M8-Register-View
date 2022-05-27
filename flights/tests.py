@@ -421,7 +421,7 @@ class Register(APITestCase):
             "last_name": "bee",
         }
         response = self.client.post(reverse("register"), data)
-        user = User.objects.get(id=1)
+        user = User.objects.get(username="laila")
 
         self.assertEqual(data["first_name"], user.first_name)
         self.assertEqual(data["last_name"], user.last_name)
