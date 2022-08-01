@@ -10,5 +10,5 @@ Where do I sign up?
    - `password`
    - `first_name`
    - `last_name`
-5. Create a `URL` named `register` for the above view and test it in `Postman`.
+5. Create a `URL` named `register` for the view above and test it in `Postman`.
 6. Push your code.
